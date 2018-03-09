@@ -1,0 +1,17 @@
+C:\Users\Jacko\source\repos\WebApplication1\WebApplication1\bin\WebApplication1.dll.config
+C:\Users\Jacko\source\repos\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\Users\Jacko\source\repos\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\Users\Jacko\source\repos\WebApplication1\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Jacko\source\repos\WebApplication1\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Jacko\source\repos\WebApplication1\WebApplication1\obj\Debug\Website.csprojResolveAssemblyReference.cache
+C:\Users\Jacko\source\repos\WebApplication1\WebApplication1\obj\Debug\Website.csproj.CoreCompileInputs.cache
+C:\Users\Jacko\source\repos\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+C:\Users\Jacko\source\repos\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\obj\Debug\Website.csproj.CoreCompileInputs.cache
+C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\bin\HairSalon.dll.config
+C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\bin\HairSalon.dll
+C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\bin\HairSalon.pdb
+C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\obj\Debug\HairSalon.dll
+C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\obj\Debug\HairSalon.pdb

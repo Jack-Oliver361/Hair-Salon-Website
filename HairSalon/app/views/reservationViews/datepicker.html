@@ -1,0 +1,11 @@
+﻿<h3 class="text-center">Select an available date</h3>
+
+<div style="width: 50%; margin: 0 auto">
+    <p class="input-group">
+        <input type="text" class="form-control" uib-datepicker-popup ng-model="reservationCtrl.selectedDate" is-open="isOpen"
+               datepicker-options="reservationCtrl.datepickerOptions" ng-change="reservationCtrl.onSelectDate()" />
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="isOpen = !isOpen"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+    </p>
+</div>
