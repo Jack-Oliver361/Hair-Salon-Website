@@ -20,41 +20,34 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
     };
 
     var _login = function (loginData) {
-        
-        //var data = 'grant_type=password&username=' + loginData.userName + '&password=' + loginData.password;
-
+ 
+        var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
+ 
         var deferred = $q.defer();
-
-        var req = {
+ 
+        $http({
             method: 'POST',
             url: serviceBase + 'token/login',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            data: 'grant_type=password&username=' + loginData.userName + '&password=' + loginData.password
-
-            
-        }
-
-        $http(req).then(function onSuccess(response) {
-
+            data: data,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }).then(function (response) {
 
             console.log(response.data);
-            localStorageService.set('authorizationData', { token: response.data.access_token, username: loginData.userName });
-
+            localStorageService.set('authorizationData', { token: response.data.access_token, userName: loginData.userName });
+ 
             _authentication.isAuth = true;
             _authentication.userName = loginData.userName;
-
+ 
             deferred.resolve(response);
-
-        }).catch(function onError(err, status) {
+ 
+            }, function errorCallback (response) {
                 _logOut();
-                deferred.reject(err);
-            });
-
+                deferred.reject(response.status);
+        });
+ 
         return deferred.promise;
-
-    };
+ 
+    }
 
     var _logOut = function () {
 
@@ -73,7 +66,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
             _authentication.userName = authData.userName;
         }
 
-    };
+    }
 
     authServiceFactory.saveRegistration = _saveRegistration;
     authServiceFactory.login = _login;

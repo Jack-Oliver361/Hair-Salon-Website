@@ -15,3 +15,12 @@ C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\bin\HairSalon.dll
 C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\bin\HairSalon.pdb
 C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\obj\Debug\HairSalon.dll
 C:\Users\Jacko\Desktop\WebApplication1\WebApplication1\obj\Debug\HairSalon.pdb
+C:\Users\Jacko\Desktop\Hair Salon Website\HairSalon\bin\HairSalon.dll.config
+C:\Users\Jacko\Desktop\Hair Salon Website\HairSalon\bin\HairSalon.dll
+C:\Users\Jacko\Desktop\Hair Salon Website\HairSalon\bin\HairSalon.pdb
+C:\Users\Jacko\Desktop\Hair Salon Website\HairSalon\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Jacko\Desktop\Hair Salon Website\HairSalon\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Jacko\Desktop\Hair Salon Website\HairSalon\obj\Debug\Website.csprojResolveAssemblyReference.cache
+C:\Users\Jacko\Desktop\Hair Salon Website\HairSalon\obj\Debug\Website.csproj.CoreCompileInputs.cache
+C:\Users\Jacko\Desktop\Hair Salon Website\HairSalon\obj\Debug\HairSalon.dll
+C:\Users\Jacko\Desktop\Hair Salon Website\HairSalon\obj\Debug\HairSalon.pdb

@@ -3,9 +3,7 @@
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
-app.config(['$qProvider', function ($qProvider) {
-    $qProvider.errorOnUnhandledRejections(false);
-}]);
+
 
 
 
