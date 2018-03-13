@@ -22,7 +22,7 @@
             getAvailableHoursAPIUrl: "http://localhost:62975/api/appointments/availableTimes", //API url endpoint to load list of available hours
             getAvailableEmployeesAPIUrl: "http://localhost:62975/api/employees", //API url endpoint to load list of available employees
             getAvailableServicesAPIUrl: "http://localhost:62975/api/services",
-            reserveAPIUrl: "http://localhost:62975/api/createBooking", //API url endpoint to do a reserve
+            reserveAPIUrl: "http://localhost:62975/api/appointments/createBooking", //API url endpoint to do a reserve
             dateFormat: "dd/MM/yyyy",
             language: "en",
             showConfirmationModal: true,
@@ -53,9 +53,9 @@
  */
 (function () {
     //Controller
-    angular.module('hm.reservation').controller('ReservationCtrl', ['$scope', '$filter', '$translate', 'reservationAPIFactory', 'reservationConfig', 'reservationService', 'authService', reservationCtrl]);
+    angular.module('hm.reservation').controller('ReservationCtrl', ['$scope', '$filter', '$translate', 'reservationAPIFactory', 'reservationConfig', 'reservationService', 'authService', '$location', '$timeout', reservationCtrl]);
 
-    function reservationCtrl($scope, $filter, $translate, reservationAPIFactory, reservationConfig, reservationService, authService) {
+    function reservationCtrl($scope, $filter, $translate, reservationAPIFactory, reservationConfig, reservationService, authService, $location, $timeout) {
         //Capture the this context of the Controller using vm, standing for viewModel
         var vm = this;
 
@@ -68,6 +68,7 @@
         vm.selectedDate = new Date();
 
         vm.selectedHour = "";
+        vm.formattedDate = "";
         vm.selectedService = "";
         vm.selectedProvider = "";
         vm.userData = {};
@@ -107,18 +108,23 @@
         vm.availableHours = [];
         //METHODS
         vm.onSelectDate = function (date) {
-            var selectedDateFormatted = $filter('date')(date, vm.dateFormat);
-            vm.selectedDate = selectedDateFormatted;
+            vm.selectedDate = date;
             vm.thirdTabLocked = false;
             vm.selectedTab = 2;
+            vm.fourthTabLocked = true;
+            vm.fifthTabLocked = true;
+            vm.selectedHour = "";
+            vm.selectedProvider = "";
             
 
         }
         $scope.authentication = authService.authentication;
         vm.selectHour = function (hour) {
-            vm.fourthTabLocked = false;
+            vm.fifthTabLocked = false;
             vm.selectedHour = hour;
             vm.selectedTab = 4;
+            vm.formattedDate = $filter('date')(vm.selectedDate, vm.dateFormat);
+            getAvailableHours(provider, vm.selectedDate, vm.selectedService);
             
         }
 
@@ -126,13 +132,22 @@
             vm.fourthTabLocked = false;
             vm.selectedProvider = provider;
             vm.selectedTab = 3;
-            getAvailableHours(provider, vm.selectedDate);
+            getAvailableHours(provider, vm.selectedDate, vm.selectedService);
+            vm.fifthTabLocked = true;
+            vm.selectedHour = "";
+
 
         }
         vm.selectService = function (service) {
             vm.secondTabLocked = false;
             vm.selectedService = service;
             vm.selectedTab = 1;
+            vm.thirdTabLocked = true;
+            vm.fourthTabLocked = true;
+            vm.fifthTabLocked = true;
+            vm.selectedHour = "";
+            vm.formattedDate = "";
+            vm.selectedProvider = "";
           
         }
 
@@ -281,14 +296,14 @@
         /**
          * Get available hours for a selected date
          */
-        function getAvailableHours(provider, date) {
+        function getAvailableHours(provider, date, service) {
             var selectedDateFormatted = $filter('date')(date, vm.dateFormat);
 
             var params = {
                 fullName: provider,
-                date: selectedDateFormatted
+                date: selectedDateFormatted,
+                Service: service
             };
-            console.log(selectedDateFormatted);
             vm.loader = true;
             reservationAPIFactory.getAvailableHours(params).then(function () {
                 vm.loader = false;
@@ -315,26 +330,15 @@
             });
         }
 
-        /**
-         * Function executed before reserve function
-         */
-        function onBeforeReserve(date, hour, userData) {
-            reservationService.onBeforeReserve(date, hour, userData).then(function () {
-                reserve(date, hour, userData);
-
-            }, function () {
-                console.log("onBeforeReserve: Rejected promise");
-            });
-        }
+       
 
         /**
          * Do reserve POST with selectedDate, selectedHour and userData as parameters of the call
          */
-        function reserve(service, date, provider, hour) {
-            vm.loader = true;
-
+        function reserve(service, date, provider, hour, email) {
             var selectedDateFormatted = $filter('date')(date, vm.dateFormat);
-            var params = {selectedDate: selectedDateFormatted, selectedHour: hour, userData: userData};
+            vm.loader = true;
+            var params = { selectedService: service, selectedDate: selectedDateFormatted, selectedProvider: provider, selectedHour: hour, Email: email};
 
             reservationAPIFactory.reserve(params).then(function () {
                 vm.loader = false;
@@ -343,17 +347,20 @@
                 var message = vm.reservationMessage = reservationAPIFactory.message;
 
                 //Completed reserve callback
-                reservationService.onCompletedReserve(status, message, date, hour, userData);
+                reservationService.onCompletedReserve(service, date, provider, hour, email);
 
                 //Success
                 if (status == 200) {
                     //Successful reserve calback
-                    reservationService.onSuccessfulReserve(status, message, date, hour, userData);
+                    reservationService.onSuccessfulReserve(service, date, provider, hour, email);
+                    $timeout(function () {
+                        $location.path('/home');
+                    }, 3000);
 
                     //Error
                 } else {
                     //Error reserve callback
-                    reservationService.onErrorReserve(status, message, date, hour, userData);
+                    reservationService.onErrorReserve(service, date, provider, hour, email);
                 }
             });
         }
@@ -425,14 +432,11 @@
 
             }).then(function(response) {
                 //Success handler
-                console.log(response.data);
                 //validateAvailableHoursResponseData(response.data);
 
                 reservationAPI.status = response.status;
                 reservationAPI.message = response.data.message;
-              
                 reservationAPI.availableHours = response.data;
-                console.log(reservationAPI.availableHours);
             }, function(response) {
                 reservationAPI.errorManagement(response.status);
             });
@@ -451,13 +455,11 @@
                 //Success handler
                 
                 //validateAvailableServicesResponseData(response.data);
-                console.log(response.status);
                 reservationAPI.status = response.status;
                 reservationAPI.message = response.data.message;
                 angular.forEach(response.data, function (item) {
                     reservationAPI.availableServices.push(item.name);
                 })
-                console.log(reservationAPI.availableServices);
 
             }).catch(function Error(response) {
                 reservationAPI.errorManagement(response.status);
@@ -478,13 +480,11 @@
                 //Success handler
 
                 //validateAvailableServicesResponseData(response.data);
-                console.log(response.status);
                 reservationAPI.status = response.status;
                 reservationAPI.message = response.data.message;
                 angular.forEach(response.data, function (item) {
                 reservationAPI.availableProviders.push(item.firstName + " " + item.lastName);
                })
-                console.log(reservationAPI.availableProviders);
 
             }).catch(function Error(response) {
                 reservationAPI.errorManagement(response.status);
@@ -501,9 +501,8 @@
 
             }).then(function(response) {
                 //Success handler
-                console.log(response.data);
                 //validateReserveResponseData(response.data);
-                reservationAPI.status = responsestatus;
+                reservationAPI.status = response.status;
                 reservationAPI.message = response.data.message;
 
             }, function(response) {
@@ -601,17 +600,17 @@
         }
         //Completed get available services callback
         this.onCompletedGetAvailableProviders = function (status, message) {
-            console.log("Executing completed get available services callback");
+            console.log("Executing completed get available Providers callback");
         }
 
         //Success get available services callback
         this.onSuccessfulGetAvailableProviders = function (status, message, availableServices) {
-            console.log("Executing successful get available services callback");
+            console.log("Executing successful get available Providers callback");
         }
 
         //Error get available services callback
         this.onErrorGetAvailableProviders = function (status, message) {
-            console.log("Executing error get available services callback");
+            console.log("Executing error get available Providers callback");
         }
 
         //Before get available hours callback
@@ -641,12 +640,12 @@
         }
 
         //Before reserve callback
-        this.onBeforeReserve = function(selectedDate, selectedHour, userData) {
+        this.onBeforeReserve = function(service, date, provider, hour, email) {
             console.log("Executing before reserve callback");
             var deferred = $q.defer();
 
             if(reservationConfig.showConfirmationModal) {
-                openConfirmationModal(deferred, selectedDate, selectedHour, userData);
+                openConfirmationModal(deferred, service, date, provider, hour, email);
 
             } else {
                 deferred.resolve();
@@ -658,17 +657,17 @@
 
 
         //Completed reserve callback
-        this.onCompletedReserve = function(status, message, selectedDate, selectedHour, userData) {
+        this.onCompletedReserve = function (status, message, service, date, provider, hour, email) {
             console.log("Executing completed reserve callback");
         }
 
         //Success reserve callback
-        this.onSuccessfulReserve = function(status, message, reservedDate, reservedHour, userData) {
+        this.onSuccessfulReserve = function (status, message, service, date, provider, hour, email) {
             console.log("Executing successful reserve callback");
         }
 
         //Error reserve callback
-        this.onErrorReserve = function(status, message, selectedDate, selectedHour, userData) {
+        this.onErrorReserve = function (status, message, service, date, provider, hour, email) {
             console.log("Executing error reserve callback");
         }
 
@@ -678,7 +677,7 @@
         /**
          * Controller for confirmation modal
          */
-        function confirmationModalCtrl(selectedDate, selectedHour, userData) {
+        function confirmationModalCtrl(service, date, provider, hour, email) {
             var vm = this;
 
             vm.selectedDate = selectedDate;
@@ -765,10 +764,10 @@
     }]);
 })();
 angular.module("hm.reservation").run(["$templateCache", function ($templateCache) {
-$templateCache.put("availableServices.html", "<a class=\"list-group-item\" href=\"\" ng-repeat=\"item in reservationCtrl.availableServices\" ng-click=\"reservationCtrl.selectService(item)\"\r\n   ng-class=\"{\'angular-reservation-selected\': reservationCtrl.selectedservice == item}\">\r\n    <span>{{item}}</span>\r\n</a>");
-$templateCache.put("availableProviders.html", "<a class=\"list-group-item\" href=\"\" ng-repeat=\"item in reservationCtrl.availableProviders\" ng-click=\"reservationCtrl.selectProvider(item)\"\r\n   ng-class=\"{\'angular-reservation-selected\': reservationCtrl.selectedprovider == item}\">\r\n    <span>{{item}}</span>\r\n</a>");
+$templateCache.put("availableServices.html", "<a class=\"list-group-item\" href=\"\" ng-repeat=\"item in reservationCtrl.availableServices\" ng-click=\"reservationCtrl.selectService(item)\"\r\n   ng-class=\"{\'angular-reservation-selected\': reservationCtrl.selectedService == item}\">\r\n    <span>{{item}}</span>\r\n</a>");
+$templateCache.put("availableProviders.html", "<a class=\"list-group-item\" href=\"\" ng-repeat=\"item in reservationCtrl.availableProviders\" ng-click=\"reservationCtrl.selectProvider(item)\"\r\n   ng-class=\"{\'angular-reservation-selected\': reservationCtrl.selectedProvider == item}\">\r\n    <span>{{item}}</span>\r\n</a>");
 $templateCache.put("availableHours.html", "<a class=\"list-group-item\" href=\"\" ng-repeat=\"item in reservationCtrl.availableHours\" ng-click=\"reservationCtrl.selectHour(item)\"\r\n   ng-class=\"{\'angular-reservation-selected\': reservationCtrl.selectedHour == item}\">\r\n    <span>{{item}}</span>\r\n</a>");
-$templateCache.put("clientForm.html","<div class=\"col-md-4 col-md-offset-5 angular-reservation-clientForm\">\r\n    <div class=\"row\">\r\n        <h4 class=\"\" for=\"name\">{{\"Service\" | translate}} {{authentication.userName}}</h4> </div>\r\n\r\n   <div class=\"row\"> <h4 class=\"\" for=\"phone\">{{\"Day:\" | translate}} {{reservationCtrl.selectedDate}}</h4> </div>\r\n    <div class=\"row\"> <h4 class=\"\" for=\"email\">{{\"Provider\" | translate}} {{reservationCtrl.selectedProvider}}</h4> </div>\r\n <div class=\"row\"> <h4 class=\"\" for=\"email\">{{\"Time of Day\" | translate}} {{reservationCtrl.selectedHour}}</h4> </div> <div class=\"row\"> <button ng-click=\"reservationCtrl.reserve()\"> Book Now </button> </div>\r\n\r\n  <div uib-alert class=\"alert-success text-center\" ng-if=\"reservationCtrl.reservationStatus == \'SUCCESS\'\" style=\"margin-top: 1em\">\r\n            <span>Success!</span>\r\n            <p ng-if=\"reservationCtrl.reservationMessage\">{{reservationCtrl.reservationMessage}}</p>\r\n        </div>\r\n\r\n        <div uib-alert class=\"alertt-danger text-center\" ng-if=\"reservationCtrl.reservationStatus == \'ERROR\'\" style=\"margin-top: 1em\">\r\n            <span>Error!</span>\r\n            <p ng-if=\"reservationCtrl.reservationMessage\">{{reservationCtrl.reservationMessage}}</p>\r\n        </div>\r\n    </div>\r\n</div>");
+$templateCache.put("clientForm.html", "<div class=\"col-md-4 col-md-offset-4 angular-reservation-clientForm\">\r\n    <div class=\"row\">\r\n        <h4 class=\"\" for=\"name\" style=\"margin-left:calc(100% - 75%);\">{{\"Service\" | translate}} {{reservationCtrl.selectedService}}</h4> </div>\r\n\r\n   <div class=\"row\"> <h4 class=\"\" for=\"phone\" style=\"margin-left:calc(100% - 75%);\">{{\"Day:\" | translate}} {{reservationCtrl.formattedDate}}</h4> </div>\r\n    <div class=\"row\"> <h4 class=\"\" for=\"email\" style=\"margin-left:calc(100% - 75%);\">{{\"Provider:\" | translate}} {{reservationCtrl.selectedProvider}}</h4> </div>\r\n <div class=\"row\"> <h4 class=\"\" for=\"email\" style=\"margin-left:calc(100% - 75%);\">{{\"Time:\" | translate}} {{reservationCtrl.selectedHour}}</h4> </div> <div class=\"row\"> <button style=\"margin-left:calc(100% - 75%);\" class=\"btn btn- info\" ng-click=\"reservationCtrl.reserve()\"> Book Now </button> </div>\r\n\r\n  <div uib-alert class=\"alert-success text-center\" ng-if=\"reservationCtrl.reservationStatus == 200\" style=\"margin-top: 1em\">\r\n            <span>Success!</span>\r\n            <p ng-if=\"reservationCtrl.reservationMessage\">{{reservationCtrl.reservationMessage}}</p>\r\n        </div>\r\n\r\n        <div uib-alert class=\"alertt-danger text-center\" ng-if=\"reservationCtrl.reservationStatus == 500\" style=\"margin-top: 1em\">\r\n            <span>Error!</span>\r\n            <p ng-if=\"reservationCtrl.reservationMessage\">{{reservationCtrl.reservationMessage}}</p>\r\n        </div>\r\n    </div>\r\n</div>");
 $templateCache.put("confirmationModal.html","<div class=\"modal-header\">\r\n    <h3 class=\"modal-title\">{{\"confirmTitle\" | translate}}</h3>\r\n</div>\r\n\r\n<div class=\"modal-body\">\r\n    <h5>{{\"confirmText\" | translate : confirmationModalCtrl.translationParams}}</h5>\r\n\r\n    <div ng-repeat=\"(key, value) in confirmationModalCtrl.userData track by $index\">\r\n        <label class=\"control-label\">{{key | translate}}</label>\r\n\r\n        <h5>{{value}}</h5>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"modal-footer\">\r\n    <button class=\"btn btn-danger\" type=\"button\" ng-click=\"$dismiss()\">{{\"confirmCancel\" | translate}}</button>\r\n    <button class=\"btn btn-success\" type=\"button\" ng-click=\"$close()\">{{\"confirmOK\" | translate}}</button>\r\n</div>");
 $templateCache.put("datepicker.html","<div uib-datepicker class=\"angular-reservation-datepicker\" ng-model=\"reservationCtrl.selectedDate\" datepicker-options=\"reservationCtrl.datepickerOptions\"\r\n     ng-change=\"reservationCtrl.onSelectDate(reservationCtrl.selectedDate)\"></div>");
 $templateCache.put("index.html", "<div class=\"angular-reservation-box\"> \r\n <uib-tabset active=\"reservationCtrl.selectedTab\" justified=\"true\"> \r\n <uib-tab index=\"0\"> \r\n <uib-tab-heading> \r\n <span class=\"glyphicon glyphicon-list-alt\" aria-hidden=\"true\" class=\"angular-reservation-icon-size\"></span>\r\n <h5 ng-if=\"reservationCtrl.secondTabLocked\">{{\"Services\" | translate}}</h5> \r\n <h5 ng-if=\"!reservationCtrl.secondTabLocked\">{{reservationCtrl.selectedService}}</h5> \r\n </uib-tab-heading> \r\n\r\n <div ng-include=\"\'loader.html\'\" class=\"text-center\" style=\"min-height: 250px\" ng-if=\"reservationCtrl.loader\"> </div> \r\n\r\n <div ng-include=\"reservationCtrl.serviceTemplate\" ng-if=\"!reservationCtrl.loader\"></div>\r\n </uib-tab>\r\n\r\n <uib-tab index=\"1\" disable=\"reservationCtrl.secondTabLocked\"> \r\n <uib-tab-heading> \r\n <span class=\"glyphicon glyphicon-calendar\" aria-hidden=\"true\" class=\"angular-reservation-icon-size\"></span>\r\n <h5 ng-if=\"reservationCtrl.thirdTabLocked\">{{\"date\" | translate}}</h5> \r\n <h5 ng-if=\"!reservationCtrl.thirdTabLocked\">{{reservationCtrl.selectedDate | date: reservationCtrl.dateFormat}}</h5> \r\n </uib-tab-heading> \r\n\r\n <div ng-include=\"\'loader.html\'\" class=\"text-center\" style=\"min-height: 250px\" ng-if=\"reservationCtrl.loader\"> </div> \r\n\r\n <div ng-include=\"reservationCtrl.datepickerTemplate\" ng-if=\"!reservationCtrl.loader\"></div>\r\n </uib-tab>\r\n\r\n <uib-tab index=\"2\" disable=\"reservationCtrl.thirdTabLocked\"> \r\n <uib-tab-heading> \r\n <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\" class=\"angular-reservation-icon-size\"></span>\r\n <h5 ng-if=\"reservationCtrl.fourthTabLocked\">{{\"Provider\" | translate}}</h5> \r\n <h5 ng-if=\"!reservationCtrl.fourthTabLocked\">{{reservationCtrl.selectedProvider}}</h5>\r\n </uib-tab-heading>\r\n\r\n <div ng-include=\"\'loader.html\'\" class=\"text-center\" style=\"min-height: 250px\" ng-if=\"reservationCtrl.loader\"></div>\r\n\r\n <div ng-include=\"reservationCtrl.providerTemplate\" ng-if=\"!reservationCtrl.loader\"></div>\r\n\r\n </uib-tab>\r\n <uib-tab index=\"3\" disable=\"reservationCtrl.fourthTabLocked\"> \r\n <uib-tab-heading> \r\n <span class=\"glyphicon glyphicon-time\" aria-hidden=\"true\" class=\"angular-reservation-icon-size\"></span>\r\n <h5 ng-if=\"reservationCtrl.fifthTabLocked\">{{\"time\" | translate}}</h5>\r\n                <h5 ng-if=\"!reservationCtrl.fifthTabLocked\">{{reservationCtrl.selectedHour}}</h5>\r\n \r\n\r\n </uib-tab-heading>\r\n\r\n <div ng-include=\"\'loader.html\'\" class=\"text-center\" style=\"min-height: 250px\" ng-if=\"reservationCtrl.loader\"></div>\r\n\r\n <div class=\"angular-reservation-availableHour\" ng-if=\"!reservationCtrl.loader && reservationCtrl.availableHours.length > 0\"> \r\n <div ng-include=\"reservationCtrl.availableHoursTemplate\"></div>\r\n </div>\r\n\r\n <div ng-if=\"!reservationCtrl.loader && reservationCtrl.availableHours.length == 0\"> \r\n \r\n </div>\r\n </uib-tab>\r\n\r\n  <uib-tab index=\"4\" disable=\"reservationCtrl.fifthTabLocked\">\r\n            <uib-tab-heading>\r\n                <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\" class=\"angular-reservation-icon-size\"></span>\r\n                <h5>{{\"client\" | translate}}</h5>\r\n            </uib-tab-heading>\r\n\r\n            <form class=\"form-horizontal\" name=\"reserveForm\" novalidate\r\n                  ng-submit=\"reserveForm.$valid && reservationCtrl.reserve(reservationCtrl.selectedDate, reservationCtrl.selectedHour, reservationCtrl.userData)\">\r\n                <div ng-include=\"\'loader.html\'\" class=\"text-center\" style=\"min-height: 250px\" ng-if=\"reservationCtrl.loader\"></div>\r\n\r\n                <fieldset ng-if=\"!reservationCtrl.loader\">\r\n                    <div ng-include=\"reservationCtrl.clientFormTemplate\"></div>\r\n                </fieldset>\r\n            </form>\r\n        </uib-tab></uib-tabset>\r\n</div>\r\n" );
