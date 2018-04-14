@@ -2,47 +2,47 @@
     cursor: pointer
 }
 
-.angular-reservation-box {
+.angular-booking-box {
     border: 2px solid #dcdcdc
 }
 
-.angular-reservation-icon-size {
+.angular-booking-icon-size {
     font-size: 18px
 }
 
-.angular-reservation-selected {
+.angular-booking-selected {
     color: #fff !important;
     background-color: #5cb85c
 }
 
-    .angular-reservation-selected:hover {
+    .angular-booking-selected:hover {
         color: #fff !important;
         background-color: #5cb85c !important
     }
 
-.angular-reservation-datepicker {
+.angular-booking-datepicker {
     width: 252px;
     margin: 2em auto
 }
 
-.angular-reservation-availableHour {
+.angular-booking-availableHour {
     margin: 2em
 }
-.angular-reservation-availableService {
+.angular-booking-availableService {
     margin: 2em
 }
 
-.angular-reservation-noAvailableHours {
+.angular-booking-noAvailableHours {
     margin: 2em;
     display: block;
     text-align: center
 }
 
-.angular-reservation-clientForm {
+.angular-booking-clientForm {
     margin-top: 2em;
     margin-bottom: 2em
 }
 
-.angular-reservation-loader-min-height {
+.angular-booking-loader-min-height {
     min-height: 500px
 }

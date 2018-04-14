@@ -1,4 +1,4 @@
-﻿var app = angular.module('HairSalonWeb', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', "hm.reservation", "ui.bootstrap", "pascalprecht.translate", "ngMessages"]);
+﻿var app = angular.module('HairSalonWeb', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', "hm.booking", "ui.bootstrap", "pascalprecht.translate", "ngMessages"]);
 
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
@@ -29,6 +29,7 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });
+
 });
 
 app.run(['authService', function (authService) {

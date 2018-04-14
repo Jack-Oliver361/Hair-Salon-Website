@@ -1,17 +1,30 @@
-﻿<form class="form-login" role="form">
-    <h2 class="form-login-heading">Sign up</h2>
-    <input type="text" class="form-control" placeholder="First Name" data-ng-model="registration.firstName" required autofocus>
-    <input type="text" class="form-control" placeholder="Last Name" data-ng-model="registration.lastName" required>
-    <input type="text" class="form-control" placeholder="Email" data-ng-model="registration.email" required>
-    <input type="password" class="form-control" placeholder="Password" data-ng-model="registration.password" required>
-    <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="registration.confirmPassword" required>
-    <input type="text" class="form-control" placeholder="Phone Number" data-ng-model="registration.phone" required>
-    <input type="text" class="form-control" placeholder="Date of birth (DD/MM/YYYY)" data-ng-model="registration.dob" required>
-    <select class="form-control" placeholder="Phone Number" data-ng-model="registration.gender">
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-    </select>
-    <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="signUp()">Submit</button>
+﻿<form class="form-horizontal" role="form">
+    <h2 class="form-login-heading text-center">Sign up</h2>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <span class="float-md-left">
+                <input style="margin-top: 1em;" type="text" class="form-control" placeholder="First Name (*)" data-ng-model="registration.firstName" required autofocus>
+                <input style="margin-top: 1em;" type="text" class="form-control" placeholder="Last Name (*)" data-ng-model="registration.lastName" required>
+                <input style="margin-top: 1em;" type="text" class="form-control" placeholder="Email (*)" data-ng-model="registration.email" required>
+            </span>
+            <h4>Fields marked with (*) are required to be filled</h4>
+        </div>
+        <div class="col-md-6">
+            <span class="float-md-right">
+                <input style="margin-top: 1em;" type="password" class="form-control" placeholder="Password (*)" data-ng-model="registration.password" required>
+                <input style="margin-top: 1em;" type="password" class="form-control" placeholder="Confirm Password (*)" data-ng-model="registration.confirmPassword" required>
+                <input style="margin-top: 1em;" type="text" class="form-control" placeholder="Phone Number (*)" data-ng-model="registration.phone" required>
+                <input style="margin-top: 1em;" type="text" class="form-control" placeholder="Date of birth (DD/MM/YYYY) (*)" data-ng-model="registration.dob" required>
+                <select style="margin-top: 1em; margin-bottom: 1em;" class="form-control" placeholder="Phone Number (*)" data-ng-model="registration.gender">
+                    <option value="" selected disabled>Please select Gender (*)</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </span>
+        </div>
+        <button style="margin-top: 1em; margin-bottom: 1em;" class="btn btn-lg btn-info col-md-2 col-md-offset-5" type="submit" data-ng-click="signUp()">Submit</button>
+    </div>
+    
     <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
         {{message}}
     </div>
