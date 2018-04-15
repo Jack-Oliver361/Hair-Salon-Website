@@ -54,12 +54,16 @@ body {
     background-image: none;
 }
     .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus .nav-tabs > li > a {
-        background-color: #75CAC2;
+        border-bottom: 2px solid #75CAC2;
+        background-color: #201713;
+        padding-bottom: 10px;
         color: #fff;
     }
-.text-info {
-    color: red;
-}
+    .navbar-inverse .navbar-nav > li > a:focus {
+        background-color: #201713;
+        border-bottom: 2px solid #75CAC2;
+        padding-bottom: 10px;
+    }
 .btn-default {
     background-color: #75CAC2;
     border-color: #afafaf;
@@ -196,7 +200,7 @@ body {
 }
 
 .paddingTB60 {
-    padding: 60px 0px 60px 0px;
+    padding: 60px 0px 0px 0px;
 }
 
 .gray-bg {
@@ -298,14 +302,9 @@ h2 {
     font-family: 'Raleway', sans-serif;
 }
 
-.ion-minus {
-    padding: 0px 10px;
-}
 
 .team {
     background-color: #f1f1f1;
-    padding: 60px 0px;
-    font-family: 'Raleway', sans-serif;
 }
 
     .team h4 {
@@ -319,10 +318,6 @@ h2 {
         margin-top: 5px;
         padding: 3px;
     }
-.header-title {
-    text-align: center;
-    color: #00bfff;
-}
 
 #tip {
     display: none;
@@ -347,15 +342,15 @@ h2 {
 
 .btn-send {
     border-radius: 0px;
-    border: 1px solid #00bfff;
-    background: #00bfff;
+    border: 1px solid #75CAC2;
+    background: #75CAC2;
     color: #fff;
 }
 
     .btn-send:hover {
-        border: 1px solid #00bfff;
+
         background: #fff;
-        color: #00bfff;
+        color: #201713;
         transition: background 0.5s;
     }
 
@@ -379,21 +374,14 @@ h2 {
         border: 8px solid white;
         line-height: 88px;
         border-radius: 50%;
-        background: #00bfff;
+        background: #75CAC2;
         vertical-align: middle;
     }
 
-    .box > .icon:hover > .image {
-        background: #333;
-    }
-
+    
     .box > .icon > .image > i {
         font-size: 36px !important;
         color: #fff !important;
-    }
-
-    .box > .icon:hover > .image > i {
-        color: white !important;
     }
 
     .box > .icon > .info {
@@ -404,45 +392,32 @@ h2 {
         min-height: 163px;
     }
 
-    .box > .icon:hover > .info {
-        background: rgba(0, 0, 0, 0.04);
-        border-color: #e0e0e0;
-        color: white;
-    }
+   
 
     .box > .icon > .info > h3.title {
-        font-family: "Robot",sans-serif !important;
         font-size: 16px;
         color: #222;
         font-weight: 700;
     }
 
-    .box > .icon > .info > p {
-        font-family: "Robot",sans-serif !important;
-        font-size: 13px;
-        color: #666;
-        line-height: 1.5em;
-        margin: 20px;
-    }
+        .box > .icon > .info > p {
+            font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5em;
+            margin: 20px;
+        }
 
-    .box > .icon:hover > .info > h3.title, .box > .icon:hover > .info > p, .box > .icon:hover > .info > .more > a {
-        color: #222;
-    }
 
-    .box > .icon > .info > .more a {
-        font-family: "Robot",sans-serif !important;
-        font-size: 12px;
-        color: #222;
-        line-height: 12px;
-        text-transform: uppercase;
-        text-decoration: none;
-    }
 
-    .box > .icon:hover > .info > .more > a {
-        color: #fff;
-        padding: 6px 8px;
-        background-color: #63B76C;
-    }
+        .box > .icon > .info > .more a {
+            font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+            font-size: 12px;
+            color: #222;
+            line-height: 12px;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
 
 .box .space {
     height: 30px;

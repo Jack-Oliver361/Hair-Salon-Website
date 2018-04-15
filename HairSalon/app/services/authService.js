@@ -19,6 +19,14 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
 
     };
 
+    var _getAccount = function (registration) {
+        
+        return $http.get(serviceBase + 'api/customers/getCustomer', email).then(function (response) {
+            return response;
+        });
+
+    };
+
     var _login = function (loginData) {
  
         var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
@@ -69,6 +77,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
     }
 
     authServiceFactory.saveRegistration = _saveRegistration;
+    authServiceFactory.getAccount = _getAccount;
     authServiceFactory.login = _login;
     authServiceFactory.logOut = _logOut;
     authServiceFactory.fillAuthData = _fillAuthData;

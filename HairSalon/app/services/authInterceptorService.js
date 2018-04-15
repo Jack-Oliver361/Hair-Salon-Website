@@ -16,10 +16,13 @@ app.factory('authInterceptorService', ['$q', '$location', 'localStorageService',
     };
 
     var _responseError = function (rejection) {
-        if (rejection.status === 401) {
+        if (rejection.status != 200 && rejection.status != -1) {
             $location.path('/login');
-        } else if (rejection.status === 404){
-            $location.path('/login');
+            console.log(rejection.status);
+
+        } else if (rejection.status === -1) {
+            console.log(rejection.status);
+                    window.alert('Error connecting to the database please try again later');
         }
         return $q.reject(rejection);
     };

@@ -1,4 +1,4 @@
-﻿    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+﻿<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="about-section paddingTB60 gray-bg">
         <div class="container">
             <div class="row">
@@ -28,11 +28,12 @@
     <hr class="page_divider" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <div class="team">
+        <div class="team">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-3 text-center">
-                    <h2><span class="ion-minus"></span>Meet The Team<span class="ion-minus"></span></h2>
+                    <div class="about-title clearfix">
+                    <h1>Meet The <span>Team</span></h1>
                     <p>[Hair Salon Name] have some of the best stylists in the country, each with their own speciality but all are trained in all of the services we have to offer.</p><br>
                 </div>
             </div>
@@ -79,37 +80,39 @@
             </div>  <!-- row text-center -->
         </div>
     </div>
+</div>
     <hr class="page_divider" />
     <div class="container animated fadeIn">
         <div class="row">
             <div class="col-lg-6 col-lg-offset-3 text-center">
-                <h2><span class="ion-minus"></span>Contact<span class="ion-minus"></span></h2>
-            </div>
-            <hr>
-            <div class="col-sm-12" id="parent">
-                <div class="col-sm-6">
-                    <iframe width="100%" height="320px;" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJaY32Qm3KWTkRuOnKfoIVZws&key=AIzaSyAf64FepFyUGZd3WFWhZzisswVx2K37RFY" allowfullscreen></iframe>
+                <div class="about-title clearfix">
+                    <h1 style="padding-bottom: 20px">Contact <span>Us</span></h1>
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <form action="form.php" class="contact-form" method="post">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="nm" placeholder="Name" required="">
-                        </div>
-                        <div class="form-group form_left">
-                            <input type="email" class="form-control" id="email" name="em" placeholder="Email" required="">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="phone" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" placeholder="Mobile No." required="">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control textarea-contact" rows="5" id="comment" name="FB" placeholder="Type Your Message/Feedback here..." required=""></textarea>
-                            <br>
-                            <button class="btn btn-default btn-send"> <span class="glyphicon glyphicon-send"></span> Send </button>
-                        </div>
-                    </form>
+                <div class="col-sm-12" id="parent">
+                    <div class="col-sm-6">
+                        <iframe width="100%" height="340px;" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d162805.1455801652!2d-4.252652550477155!3d50.3883600879516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486c8d530e95ea3d%3A0x3b282cb5cef58593!2sPlymouth!5e0!3m2!1sen!2suk!4v1523811527096" allowfullscreen></iframe>
+                    </div>
+                    <div class="col-sm-6">
+                        <form action="" class="contact-form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name" name="nm" placeholder="Name" required="">
+                            </div>
+                            <div class="form-group form_left">
+                                <input type="email" class="form-control" id="email" name="em" placeholder="Email" required="">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="phone" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="11" placeholder="Mobile No." required="">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control textarea-contact" rows="5" id="comment" name="FB" placeholder="Type Your Message/Feedback here..." required=""></textarea>
+                                <br>
+                                <button style="background-color: #75CAC2; border: #75CAC2" class="btn btn-lg btn-info btn-block"> <span class="glyphicon glyphicon-send"></span> Send </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
         <div class="container second-portion">
             <div class="row">
                 <!-- Boxes de Acoes -->
@@ -118,12 +121,9 @@
                         <div class="icon">
                             <div class="image"><i class="fa fa-envelope" aria-hidden="true"></i></div>
                             <div class="info">
-                                <h3 class="title">MAIL & WEBSITE</h3>
+                                <h3 class="title">MAIL</h3>
                                 <p>
-                                    <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp gondhiyahardik6610@gmail.com
-                                    <br>
-                                    <br>
-                                    <i class="fa fa-globe" aria-hidden="true"></i> &nbsp www.hardikgondhiya.com
+                                    <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp hairsalon@example.com
                                 </p>
                             </div>
                         </div>
@@ -137,10 +137,7 @@
                             <div class="info">
                                 <h3 class="title">CONTACT</h3>
                                 <p>
-                                    <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp (+91)-9624XXXXX
-                                    <br>
-                                    <br>
-                                    <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp  (+91)-7567065254
+                                    <i class="fa fa-mobile" aria-hidden="true"></i> &nbsp 09876543211
                                 </p>
                             </div>
                         </div>
@@ -154,8 +151,7 @@
                             <div class="info">
                                 <h3 class="title">ADDRESS</h3>
                                 <p>
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp 15/3 Junction Plot
-                                    "Shree Krishna Krupa", Rajkot - 360001.
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp Sileby Road Industrial Estate, Units 2f & 2g, Barrow upon Soar LE12 8LP
                                 </p>
                             </div>
                         </div>
@@ -165,4 +161,3 @@
             </div>
         </div>
     </div>
-    <link href="content/css/site.css" rel="stylesheet" />

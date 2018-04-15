@@ -1,8 +1,10 @@
-﻿<form class="form-login" role="form">
+﻿<hr class="page_divider" />
+<form class="form-login" role="form">
     <h2 class="form-login-heading">Login</h2>
     <input type="text" class="form-control" placeholder="Email" data-ng-model="loginData.userName" required autofocus>
     <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
-    <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="login()">Login</button>
+    <button style="background-color: #75CAC2; border: #75CAC2" class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="login()">Login</button>
+    <h5> Dont have an account? Click <a href="#!signup">sign up</a> to register</h5>
     <div data-ng-hide="message == ''" class="alert alert-danger">
         {{message}}
     </div>

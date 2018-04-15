@@ -1,0 +1,32 @@
+﻿<hr class="page_divider" />
+<form class="form-horizontal" role="form" ng-init="loadData()">
+    <h2 class="form-login-heading text-center">Update Account</h2>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <span class="float-md-left">
+                <input style="margin-top: 1em;" type="text" class="form-control" placeholder="First Name (*)" data-ng-model="account.firstName" required autofocus>
+                <input style="margin-top: 1em;" type="text" class="form-control" placeholder="Last Name (*)" data-ng-model="account.lastName" required>
+                <input style="margin-top: 1em;" type="text" class="form-control" placeholder="Email (*)" data-ng-model="account.email"  ng-readonly="true" required>
+            </span>
+            <h4>Fields marked with (*) are required to be filled</h4>
+        </div>
+        <div class="col-md-6">
+            <span class="float-md-right">
+                <input style="margin-top: 1em;" type="password" class="form-control" placeholder="Password (*)" data-ng-model="account.password" required>
+                <input style="margin-top: 1em;" type="password" class="form-control" placeholder="Confirm Password (*)" data-ng-model="account.confirmPassword" required>
+                <input style="margin-top: 1em;" type="text" class="form-control" placeholder="Phone Number (*)" data-ng-model="account.phone" required>
+                <input style="margin-top: 1em;" type="text" class="form-control" placeholder="Date of birth (DD/MM/YYYY) (*)" data-ng-model="account.dob" required>
+                <select style="margin-top: 1em; margin-bottom: 1em;" class="form-control" placeholder="Phone Number (*)" data-ng-model="account.gender">
+                    <option value="" selected disabled>Please select Gender (*)</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </span>
+        </div>
+        <button style="background-color: #75CAC2; border: #75CAC2; margin-top: 1em; margin-bottom: 1em;" class="btn btn-lg btn-info col-md-2 col-md-offset-5" type="submit" data-ng-click="updateAccount()">Update</button>
+    </div>
+
+    <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+        {{message}}
+    </div>
+</form>
