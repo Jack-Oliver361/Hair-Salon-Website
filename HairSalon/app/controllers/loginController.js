@@ -16,8 +16,11 @@ app.controller('loginController', ['$scope', '$location', 'authService', functio
 
         },
             function (err) {
-                if(err.error === "invalid_grant")
+                console.log(err);
+                if (err.error === "invalid_grant")
                     $scope.message = "The user name or password is incorrect";
+                if (err === 400)
+                    $scope.message = "Email or password are incorrect";
             });
     };
 

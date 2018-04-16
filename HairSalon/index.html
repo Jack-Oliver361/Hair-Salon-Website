@@ -3,9 +3,11 @@
 <head>
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
     <title>Hair Salon</title>
+    <link href="content/css/bootstrap.min.css" rel="stylesheet" />
     <link href="content/css/site.css" rel="stylesheet" />
     <link href="content/css/loading-bar.css" rel="stylesheet" />
     <link rel="stylesheet" href="content/css/angular-reservation.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 </head>
 <body>
@@ -38,19 +40,15 @@
         </div>
     </div>
     <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
-        <!-- Overlay -->
         <div class="overlay"></div>
-        <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
             <li data-target="#bs-carousel" data-slide-to="1"></li>
             <li data-target="#bs-carousel" data-slide-to="2"></li>
         </ol>
-
-        <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item slides active">
-                <div class="slide-1"></div>
+                <div class="slideOne"></div>
                 <div class="hero">
                     <hgroup>
                         <h1>Book an appointment minutes</h1>
@@ -60,7 +58,7 @@
                 </div>
             </div>
             <div class="item slides">
-                <div class="slide-2"></div>
+                <div class="slideTwo"></div>
                 <div class="hero">
                     <hgroup>
                         <h1>Wide range of services</h1>
@@ -70,7 +68,7 @@
                 </div>
             </div>
             <div class="item slides">
-                <div class="slide-3"></div>
+                <div class="slideThree"></div>
                 <div class="hero">
                     <hgroup>
                         <h1>Best in the South-West</h1>
@@ -97,7 +95,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.js"></script>
     <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-translate/angular-translate.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="bower_components/angular-messages/angular-messages.min.js"></script>
 
@@ -105,7 +102,6 @@
 
     <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <script src="scripts/loading-bar.js"></script>
-    <script type="text/javascript" src="scripts/bookingProcess.js"></script>
 
     <!-- Load app main script -->
     <script src="app/app.js"></script>
@@ -114,10 +110,13 @@
     <script src="app/services/authService.js"></script>
     <script src="app/services/accountService.js"></script>
     <!-- Load controllers -->
-    <script src="app/controllers/indexController.js"></script>
-    <script src="app/controllers/homeController.js"></script>
-    <script src="app/controllers/loginController.js"></script>
-    <script src="app/controllers/signupController.js"></script>
-    <script src="app/controllers/accountController.js"></script>
+    <script type="text/javascript" src="app/controllers/indexController.js"></script>
+    <script type="text/javascript" src="app/controllers/homeController.js"></script>
+    <script type="text/javascript" src="app/controllers/loginController.js"></script>
+    <script type="text/javascript" src="app/controllers/signupController.js"></script>
+    <script type="text/javascript" src="app/controllers/accountController.js"></script>
+    <script type="text/javascript" src="app/controllers/bookingController.js"></script>
+    <script type="text/javascript" src="app/factory/bookingAPIFactory.js"></script>
+    <script type="text/javascript" src="app/providers/bookingConfigProvider.js"></script>
 </body>
 </html>

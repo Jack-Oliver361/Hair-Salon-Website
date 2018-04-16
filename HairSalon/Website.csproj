@@ -67,9 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\controllers\accountController.js" />
+    <Content Include="app\controllers\bookingController.js" />
+    <Content Include="app\factory\bookingAPIFactory.js" />
+    <Content Include="app\providers\bookingConfigProvider.js" />
     <Content Include="app\views\account.html" />
-    <Content Include="scripts\bookingProcess.js" />
-    <Content Include="scripts\angular-reservation.js" />
     <Content Include="content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="content\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
@@ -93,19 +94,12 @@
     <Content Include="app\views\home.html" />
     <Content Include="app\views\login.html" />
     <Content Include="app\views\reservation.html" />
-    <Content Include="app\views\reservationViews\availableHours.html" />
-    <Content Include="app\views\reservationViews\clientForm.html" />
-    <Content Include="app\views\reservationViews\confirmationModal.html" />
-    <Content Include="app\views\reservationViews\datepicker.html" />
-    <Content Include="app\views\reservationViews\noAvailableHours.html" />
     <Content Include="app\views\signup.html" />
     <Content Include="content\css\angular-reservation.min.css" />
     <Content Include="content\css\bootstrap.min.css" />
     <Content Include="content\css\loading-bar.css" />
     <Content Include="content\css\site.css" />
     <Content Include="index.html" />
-    <Content Include="scripts\angular-local-storage.js" />
-    <Content Include="scripts\angular-reservation.min.js" />
     <Content Include="scripts\loading-bar.js" />
     <Content Include="Web.config" />
   </ItemGroup>

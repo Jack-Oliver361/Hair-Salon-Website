@@ -1,4 +1,4 @@
-﻿var app = angular.module('HairSalonWeb', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', "hm.booking", "ui.bootstrap", "pascalprecht.translate", "ngMessages"]);
+﻿var app = angular.module('HairSalonWeb', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', "hm.booking", "ui.bootstrap", "ngMessages"]);
 
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');

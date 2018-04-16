@@ -1,7 +1,7 @@
-﻿@import "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css";
-@import "http://fonts.googleapis.com/css?family=Roboto:400,500";
-@import "bootstrap.min.css";
-
+﻿
+/************************/
+/* Main HTML components */
+/************************/
 
 html {
     position: relative;
@@ -12,12 +12,60 @@ body {
     font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif !important;
     margin-bottom: 60px;
     padding-top: 40px;
-    background: #F1F1F1 !important;
+    background-color: #F1F1F1 !important;
 }
 
-.text-muted {
-    margin: 20px 0;
+h2 {
+    color: #4C4C4C;
+    word-spacing: 5px;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: -10px;
+    margin-bottom: 30px;
+    font-family: 'Raleway', sans-serif;
 }
+
+.navbar-inverse {
+    background-color: #201713;
+    background-image: none;
+}
+
+    .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus .nav-tabs > li > a {
+        border-bottom: 2px solid #75CAC2;
+        background-color: #201713;
+        padding-bottom: 10px;
+        color: #fff;
+    }
+
+    .navbar-inverse .navbar-nav > li > a:focus {
+        background-color: #201713;
+        border-bottom: 2px solid #75CAC2;
+        padding-bottom: 10px;
+    }
+
+.nav-tabs > li > a {
+    background-color: white;
+    color: #428bca;
+}
+
+.btn-default {
+    color: black;
+    background-color: white;
+    border-color: #A9A9A9;
+}
+    .btn-default:hover {
+        background-color: #39b3d7;
+        color: white;
+    }
+
+.text-info {
+    color: red;
+}
+
+
+/*************************/
+/* Login and signup form */
+/*************************/
 
 .form-login {
     max-width: 330px;
@@ -49,30 +97,10 @@ body {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
-.navbar-inverse{
-    background-color: #201713;
-    background-image: none;
-}
-    .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus .nav-tabs > li > a {
-        border-bottom: 2px solid #75CAC2;
-        background-color: #201713;
-        padding-bottom: 10px;
-        color: #fff;
-    }
-    .navbar-inverse .navbar-nav > li > a:focus {
-        background-color: #201713;
-        border-bottom: 2px solid #75CAC2;
-        padding-bottom: 10px;
-    }
-.btn-default {
-    background-color: #75CAC2;
-    border-color: #afafaf;
-}
 
-.nav-tabs > li > a {
-    
-    background-color: white;
-}
+/*****************/
+/* Image carousel*/
+/*****************/
 
 .fade-carousel {
     position: relative;
@@ -166,25 +194,25 @@ body {
 }
 
 
-.fade-carousel .slides .slide-1,
-.fade-carousel .slides .slide-2,
-.fade-carousel .slides .slide-3 {
+.fade-carousel .slides .slideOne,
+.fade-carousel .slides .slideTwo,
+.fade-carousel .slides .slideThree {
     height: 50vh;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
 }
 
-.fade-carousel .slides .slide-1 {
-    background-image: url(http://3.bp.blogspot.com/-ZiP_iWJWJFE/VLBzbC3benI/AAAAAAAAAJM/2vJtFXA0rMk/s1600/V%2B07%2Bcopy.jpg);
+.fade-carousel .slides .slideOne {
+    background-image: url(https://images.unsplash.com/photo-1508474722893-c3ccb8918d39?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=37e9272050015f9b1937daea5c2e4ff9&auto=format&fit=crop&w=632&q=80);
 }
 
-.fade-carousel .slides .slide-2 {
-    background-image: url(http://stepaheadcosmetology.com/wp-content/uploads/2013/04/slider-3.jpg);
+.fade-carousel .slides .slideTwo {
+    background-image: url(https://images.unsplash.com/photo-1518220950441-a7788dff3dd6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=58ca4f2e5243e2790afda088842d132e&auto=format&fit=crop&w=1050&q=80);
 }
 
-.fade-carousel .slides .slide-3 {
-    background-image: url(http://www.barnesvillagebarber.com/wp-content/uploads/revslider/Fullwidth/slide-b2.jpg);
+.fade-carousel .slides .slideThree {
+    background-image: url(https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
 }
 
 @media screen and (min-width: 980px) {
@@ -199,7 +227,10 @@ body {
     }
 }
 
-.paddingTB60 {
+/************************/
+/* About page (Section) */
+/************************/
+.about-padding {
     padding: 60px 0px 0px 0px;
 }
 
@@ -207,43 +238,34 @@ body {
     background: #F1F1F1 !important;
 }
 
-.about-title {
+.about-title h1 {
+    color: #535353;
+    font-size: 45px;
+    font-weight: 600;
 }
 
-    .about-title h1 {
-        color: #535353;
-        font-size: 45px;
-        font-weight: 600;
-    }
-
-    .about-title span {
-        color: #75CAC2;
-        font-size: 45px;
-        font-weight: 700;
-    }
-
-    .about-title h3 {
-        color: #535353;
-        font-size: 23px;
-        margin-bottom: 24px;
-    }
-
-    .about-title p {
-        color: #7a7a7a;
-        line-height: 1.8;
-        margin: 0 0 15px;
-    }
-
-.about-paddingB {
-    padding-bottom: 12px;
+.about-title span {
+    color: #75CAC2;
+    font-size: 45px;
+    font-weight: 700;
 }
 
-.about-img {
-    padding-left: 57px;
-    
+.about-title h3 {
+    color: #535353;
+    font-size: 23px;
+    margin-bottom: 24px;
 }
 
-/* Social Icons */
+.about-title p {
+    color: #7a7a7a;
+    line-height: 1.8;
+    margin: 0 0 15px;
+}
+
+/****************/
+/* About Icons  */
+/****************/
+
 .about-icons {
     margin: 48px 0px 48px 0px;
 }
@@ -253,7 +275,6 @@ body {
         padding: 0px;
         font-size: 35px;
         color: #323232;
-        box-shadow: 0 0 3px rgba(0, 0, 0, .2);
     }
 
     .about-icons li {
@@ -262,25 +283,25 @@ body {
         display: inline-block;
     }
 
-#social-fb:hover {
+#fb-icon:hover {
     color: #3B5998;
     transition: all .001s;
 }
 
-#social-tw:hover {
-    color: #4099FF;
+#tw-icon:hover {
+    color: #33CCFF;
     transition: all .001s;
 }
 
-#social-gp:hover {
-    color: #d34836;
+#gp-icon:hover {
+    color: #C63D2D;
+    transition: all .001s;
+}
+#li-icon:hover {
+    color: #4875B4;
     transition: all .001s;
 }
 
-#social-em:hover {
-    color: #f39c12;
-    transition: all .001s;
-}
 .page_divider {
     display: block;
     border: none;
@@ -290,74 +311,32 @@ body {
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#000), to(#f1f1f1));
 }
 
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,900,700,600,500,300,200,100,800);
 
-h2 {
-    color: #4C4C4C;
-    word-spacing: 5px;
-    font-size: 30px;
-    font-weight: 700;
-    margin-top: -10px;
-    margin-bottom: 30px;
-    font-family: 'Raleway', sans-serif;
+/***************************/
+/* Meet the team (Section) */
+/***************************/
+
+.meet-the-team h4 {
+    margin-top: 20px;
+    color: #5db4c0;
+}
+
+.meet-the-team .fa {
+    color: #5db4c0;
+    font-size: 18px;
+    margin-top: 5px;
+    padding: 3px;
 }
 
 
-.team {
-    background-color: #f1f1f1;
-}
 
-    .team h4 {
-        margin-top: 20px;
-        color: #5db4c0;
-    }
+/************************/
+/* Contact Us (Section) */
+/************************/
 
-    .team .fa {
-        color: #5db4c0;
-        font-size: 18px;
-        margin-top: 5px;
-        padding: 3px;
-    }
-
-#tip {
-    display: none;
-}
-
-.fadeIn {
-    animation-duration: 3s;
-}
-
-.form-control {
-    border-radius: 0px;
-    border: 1px solid #EDEDED;
-}
-
-    .form-control:focus {
-        border: 1px solid #00bfff;
-    }
-
-.textarea-contact {
-    resize: none;
-}
-
-.btn-send {
-    border-radius: 0px;
-    border: 1px solid #75CAC2;
-    background: #75CAC2;
-    color: #fff;
-}
-
-    .btn-send:hover {
-
-        background: #fff;
-        color: #201713;
-        transition: background 0.5s;
-    }
-
-.second-portion {
+.contact-boxes {
     margin-top: 50px;
 }
-
 
 
 .box > .icon {
@@ -402,39 +381,13 @@ h2 {
 
         .box > .icon > .info > p {
             font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-            font-size: 13px;
+            font-size: 17px;
             color: #666;
             line-height: 1.5em;
             margin: 20px;
         }
 
 
-
-        .box > .icon > .info > .more a {
-            font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-            font-size: 12px;
-            color: #222;
-            line-height: 12px;
-            text-transform: uppercase;
-            text-decoration: none;
-        }
-
 .box .space {
     height: 30px;
 }
-
-@media only screen and (max-width: 768px) {
-    .contact-form {
-        margin-top: 25px;
-    }
-
-    .btn-send {
-        width: 100%;
-        padding: 10px;
-    }
-
-    .second-portion {
-        margin-top: 25px;
-    }
-}
-/* Conatct end */
