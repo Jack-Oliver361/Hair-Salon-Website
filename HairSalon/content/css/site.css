@@ -16,13 +16,16 @@ body {
 }
 
 h2 {
-    color: #4C4C4C;
+    color: #535353;
     word-spacing: 5px;
     font-size: 30px;
     font-weight: 700;
     margin-top: -10px;
     margin-bottom: 30px;
-    font-family: 'Raleway', sans-serif;
+}
+
+h4 {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif !important;
 }
 
 .navbar-inverse {
@@ -42,6 +45,11 @@ h2 {
         border-bottom: 2px solid #75CAC2;
         padding-bottom: 10px;
     }
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{
+    border-color: #f7f7f7;
+}
+
 
 .nav-tabs > li > a {
     background-color: white;
@@ -86,6 +94,9 @@ h2 {
         padding: 10px;
         font-size: 16px;
     }
+.form-control {
+    color: black;
+}
 
         .form-login .form-control:focus {
             z-index: 2;

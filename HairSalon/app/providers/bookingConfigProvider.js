@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module('hm.booking').provider('bookingConfig', [function bookingConfigProvider() {
+angular.module('booking').provider('bookingConfig', [function bookingConfigProvider() {
 
     var config = {
         getAvailableHoursAPIUrl: "http://localhost:62975/api/appointments/GetTimes", 

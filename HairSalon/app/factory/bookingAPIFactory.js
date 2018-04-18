@@ -1,4 +1,4 @@
-﻿angular.module('hm.booking').factory('bookingAPIFactory', ['$http', 'bookingConfig', function bookingAPIFactory($http, bookingConfig) {
+﻿angular.module('booking').factory('bookingAPIFactory', ['$http', 'bookingConfig', function bookingAPIFactory($http, bookingConfig) {
 
     var bookingAPI = {};
     bookingAPI.status = "";
