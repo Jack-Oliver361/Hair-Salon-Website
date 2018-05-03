@@ -14,7 +14,10 @@ body {
     padding-top: 40px;
     background-color: #F1F1F1 !important;
 }
-
+.fade-in {
+    -webkit-transition: 2s linear all;
+    transition: 2s linear all;
+}
 h2 {
     color: #535353;
     word-spacing: 5px;

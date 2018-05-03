@@ -71,6 +71,8 @@
     <Content Include="app\factory\bookingAPIFactory.js" />
     <Content Include="app\providers\bookingConfigProvider.js" />
     <Content Include="app\views\account.html" />
+    <Content Include="app\views\privacyPolicy.html" />
+    <Content Include="app\views\termsAndCon.html" />
     <Content Include="content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="content\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
@@ -101,6 +103,7 @@
     <Content Include="content\css\site.css" />
     <Content Include="index.html" />
     <Content Include="scripts\loading-bar.js" />
+    <Content Include="scripts\scrolling-nav.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

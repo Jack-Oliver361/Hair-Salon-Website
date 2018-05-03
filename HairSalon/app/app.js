@@ -7,11 +7,21 @@ app.config(function ($httpProvider) {
 
 
 
-app.config(function ($routeProvider) {
+app.config(function ( $routeProvider) {
 
     $routeProvider.when("/home", {
         controller: "homeController",
         templateUrl: "/app/views/home.html"
+    });
+
+    $routeProvider.when("/privacyPolicy", {
+        controller: "",
+        templateUrl: "/app/views/privacyPolicy.html"
+    });
+
+    $routeProvider.when("/termsAndCond", {
+        controller: "",
+        templateUrl: "/app/views/termsAndCon.html"
     });
 
     $routeProvider.when("/login", {
@@ -29,13 +39,30 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/reservation", {
-        templateUrl: "/app/views/reservation.html"
+        templateUrl: "/app/views/reservation.html",
+        
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
 
-app.run(['authService', function (authService) {
+app.run(['authService','$rootScope', '$location', function (authService, $rootScope, $location) {
     authService.fillAuthData();
+
+    $rootScope.$on('$routeChangeStart', function (event) {
+        if ($location.path() == "/reservation") {
+            var authentication = authService.authentication;
+            if (!authentication.isAuth) {
+                console.log('DENY');
+                event.preventDefault();
+                $location.path('/login');
+            }
+            else {
+                console.log('ALLOW');
+                $location.path('/reservation');
+            }
+        }
+        });
+
 }]);

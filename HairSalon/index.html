@@ -10,8 +10,9 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 </head>
-<body>
-    <div id="#navBar" class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-ng-controller="indexController">
+<body id="top" ng-init="ngLoaded = true" class="fade" ng-class="{ in: ngLoaded }">
+    <a id="top"></a>
+    <div id="navBar" class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-ng-controller="indexController">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -19,15 +20,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#/">Logo</a>
+                <a class="navbar-brand js-scroll-trigger" href="" data-ng-click="gotoTop()">Logo</a>
             </div>
 
             <div class="collapse navbar-collapse" data-collapse="!navbarExpanded" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="#!reservation">Book Now</a></li>
-                    <li><a href="#!about">About</a></li>
-                    <li> <a href="#!team">Team</a></li>
-                    <li> <a href="#!contact">Contact</a></li>
+                    <li><a class="js-scroll-trigger" href="#!reservation">Book Now</a></li>
+                    <li><a class="js-scroll-trigger" href="#about">About</a></li>
+                    <li> <a class="js-scroll-trigger" href="#team">Team</a></li>
+                    <li> <a class="js-scroll-trigger" href="#contact">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
@@ -86,13 +87,17 @@
         </div>
     </div>
     <hr />
-    <div id="footer">
+    <footer>
+        <p style="text-align: center">© 2017[Hair Salon Name], All rights reserved 2017-2018. - <a style="color:#0a93a6; text-decoration:none;" href="#!termsAndCon"> Terms and Conditions</a> - <a style="color:#0a93a6; text-decoration:none;" href="#!privacyPolicy"> Privacy Policy</a></p>
+    </footer>
 
-    </div>
     <!-- 3rd party libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -105,6 +110,8 @@
 
     <!-- Load app main script -->
     <script src="app/app.js"></script>
+    <script src="scripts/scrolling-nav.js"></script>
+
     <!-- Load services -->
     <script src="app/services/authInterceptorService.js"></script>
     <script src="app/services/authService.js"></script>
